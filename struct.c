@@ -1,21 +1,28 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-typedef struct S
+typedef struct Complex
 {
-    int a;
-    int b;
-    int arr[2];
-} S;
+    double _real, _imag;
+} Complex;
+
+Complex *newComplex(double r, double i)
+{
+    Complex *s = malloc(sizeof(Complex));
+    s->_real = r;
+    s->_imag = i;
+    return s;
+}
 
 main()
 {
-    S s1, s2;
-    s1.a = 1;
-    s1.b = 2;
-    //s1.arr[0] = s1.arr[1] = 0;
-    s2 = s1;
-    s1.arr[0] = (s1.arr[1] = 4) - 1;
-    printf("s1.arr = {%d, %d}\n", s1.arr[0], s1.arr[1]);
-    printf("s2.arr = {%d, %d}\n", s2.arr[0], s2.arr[1]);
+    Complex *p1;
+    Complex *p2;
+    p1 = newComplex(1.0, 2.0);
+    p2 = newComplex(3.0, 4.0);
+    printf("c1 r=%lf i=%lf\n", (*p1)._real, (*p1)._imag);
+    printf("c2 r=%lf i=%lf\n", p2->_real, p2->_imag);
     
+    free(p1);
+    free(p2);
 }
